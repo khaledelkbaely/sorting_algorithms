@@ -1,20 +1,26 @@
 #include "sort.h"
 
 /**
- * swap - swap two integers
+ * qswap - swap two integers
  *
  * @x: first integer
  * @y: second integer
+ * @array: array to sort
+ * @size: size of the array
  *
  * Return: Nothing
  */
-void swap(int *x, int *y)
+void qswap(int *array, size_t size, int *x, int *y)
 {
 	int temp;
 
-	temp = *x;
-	*x = *y;
-	*y = temp;
+	if (*x != *y)
+	{
+		temp = *x;
+		*x = *y;
+		*y = temp;
+		print_array(array, size);
+	}
 }
 
 /**
@@ -30,21 +36,15 @@ void swap(int *x, int *y)
 int partition(int array[], int low, int high, size_t size)
 {
 	int pivot = array[high];
-	int i = low - 1, j;
+	int i, j;
 
-	for (j = low; j < high; j++)
-	{
-		if (array[j] <= pivot)
-		{
-			i++;
-			swap(&array[i], &array[j]);
-			print_array(array, size);
-		}
-	}
-	swap(&array[i + 1], &array[high]);
-	print_array(array, size);
+	for (i = j = low; j < high; j++)
+		if (array[j] < pivot)
+			qswap(array, size, &array[i++], &array[j]);
 
-	return (i + 1);
+	qswap(array, size, &array[i], &array[high]);
+
+	return (i);
 }
 /**
  * quickSort - sort array of integer with quick sort algorithm
@@ -79,5 +79,7 @@ void quickSort(int *array, int low, int high, size_t size)
  */
 void quick_sort(int *array, size_t size)
 {
+	if (!array || !size)
+		return;
 	quickSort(array, 0, size - 1, size);
 }
