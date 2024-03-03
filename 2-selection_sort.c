@@ -1,6 +1,22 @@
 #include "sort.h"
 
 /**
+ * swap - swap two integers
+ *
+ * @x: first integer
+ * @y: second integer
+ *
+ * Return: Nothing
+ */
+void swap(int *x, int *y)
+{
+	int temp;
+
+	temp = *x;
+	*x = *y;
+	*y = temp;
+}
+/**
  * selection_sort - sort array of integers with selection sort
  *
  * @array: array to sort
@@ -22,6 +38,9 @@ void selection_sort(int *array, size_t size)
 				min_index = j;
 
 		if (min_index != i)
+		{
+			print_array(array, size);
 			swap(&array[i], &array[min_index]);
+		}
 	}
 }
