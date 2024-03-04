@@ -1,5 +1,4 @@
 #include "sort.h"
-#include <stdio.h>
 
 /**
  * shell_sort - sort an array of integers using the shell sort
@@ -15,10 +14,14 @@ void shell_sort(int *array, size_t size)
 	size_t i, j;
 	int temp;
 
-	while (gap <= (size / 3))
+	if (!array || size < 2)
+		return;
+
+	while (gap < size)
 	{
 		gap = (gap * 3) + 1;
 	}
+	gap = (gap - 1) / 3;
 
 	while (gap > 0)
 	{
