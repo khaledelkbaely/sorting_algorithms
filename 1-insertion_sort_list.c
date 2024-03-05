@@ -1,6 +1,4 @@
 #include "sort.h"
-#include <stdio.h>
-#include <stdlib.h>
 
 /**
  * insertion_sort_list - sort list via insertion sort
